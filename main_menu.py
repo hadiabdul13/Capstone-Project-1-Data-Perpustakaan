@@ -1,5 +1,6 @@
 print("""
 ============ SISTEM ADMINISTRASI PEMINJAMAN BUKU ============
+
 Selamat datang di Sistem Administrasi Peminjaman Buku!
 Sistem ini digunakan oleh petugas perpustakaan untuk mencatat, mengelola, dan memantau peminjaman buku di perpustakaan.
 """)
@@ -39,6 +40,7 @@ recycle_bin = []
 
 def perpustakaan ():
     while True:
+        print("")
         print('1. Tambah Peminjaman')
         print('2. Periksa Data Peminjaman')
         print('3. Periksa Stok Buku')
@@ -71,10 +73,10 @@ def perpustakaan ():
         elif pilihan == 9:
             fu.pengembalian_pinjaman()
         elif pilihan == 10:
-            print("Terima kasih!")
+            print("\nTerima kasih sudah menggunakan sistem administrasi peminjaman perpustakaan!")
             break
         else:
-            print("Pilihan tidak valid, coba lagi.")
+            print("\nPilihan tidak valid, coba lagi.")
 
 perpustakaan ()
 # Untuk menjalankan fungsi perpustakaan

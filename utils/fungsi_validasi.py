@@ -22,7 +22,7 @@ def validasi_id_buku(pesan = "Masukkan ID Buku: "):
         if any(buku["ID Buku"] == id_buku for buku in stok_buku):
             return id_buku
         else:
-            print("ID Buku tidak valid. Silakan coba lagi.")
+            print("\nID Buku tidak valid. Silakan coba lagi.")
 
 def validasi_tanggal():
     while True:
@@ -31,4 +31,4 @@ def validasi_tanggal():
             datetime.strptime(tanggal, "%d-%m-%Y")
             return tanggal  # Jika valid, kembalikan nilai tanggal
         except ValueError:
-            print("Format tanggal salah! Gunakan format DD-MM-YYYY.")
+            print("\nFormat tanggal salah! Gunakan format DD-MM-YYYY.")

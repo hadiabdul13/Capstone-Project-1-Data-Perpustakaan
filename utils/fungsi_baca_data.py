@@ -7,5 +7,5 @@ def read_stok_buku():
 
     from main_menu import stok_buku
 
-    print("----- Daftar Stok Buku -----")
+    print("\n----- Daftar Stok Buku -----")
     print(tabulate(stok_buku, headers='keys', tablefmt='fancy_grid'))

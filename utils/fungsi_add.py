@@ -20,7 +20,7 @@ def tambah_peminjaman(data):
             if buku_ditemukan:
                 break
             else:
-                print("ID Buku tidak ditemukan! Masukkan ID yang benar.")
+                print("\nID Buku tidak ditemukan! Masukkan ID yang benar.")
 
         while True:
             jumlah_buku = validasi_input_angka('Masukkan jumlah buku: ')
@@ -28,13 +28,13 @@ def tambah_peminjaman(data):
                 buku_ditemukan["Stok"] -= jumlah_buku
                 break
             else:
-                print("Stok tidak mencukupi! Masukkan jumlah yang sesuai.")
+                print("\nStok tidak mencukupi! Masukkan jumlah yang sesuai.")
 
         tanggal_peminjaman = None
         while not tanggal_peminjaman:  # This will keep looping until a valid date is entered
             tanggal_peminjaman = validasi_tanggal().strip().upper()
             if not tanggal_peminjaman:
-                print("Tanggal tidak valid! Masukkan format yang benar (DD-MM-YYYY).")
+                print("\nTanggal tidak valid! Masukkan format yang benar (DD-MM-YYYY).")
 
         data.append({
             'ID Peminjam': id_peminjam,
@@ -44,7 +44,7 @@ def tambah_peminjaman(data):
             'Jumlah Buku': jumlah_buku,
             'Tanggal Peminjaman': tanggal_peminjaman
         })
-        print("Peminjaman berhasil dicatat!")
+        print("\nPeminjaman berhasil dicatat!")
 
         # Ask if the user wants to borrow another book
         while True:
@@ -63,7 +63,7 @@ def tambah_stok_buku():
     from main_menu import stok_buku
 
     print("")
-    print("----- TAMBAH STOK BUKU -----")
+    print("\n----- TAMBAH STOK BUKU -----")
     judul_buku = validasi_input_alfabet("Masukkan judul buku yang akan ditambahkan: ").strip()
     penulis = validasi_input_alfabet("Masukkan Nama Penulis: ").strip()
 
@@ -73,7 +73,7 @@ def tambah_stok_buku():
     for buku in stok_buku:
         if buku["Judul Buku"].lower() == judul_buku.lower() and buku["Penulis"].lower() == penulis.lower():
             buku["Stok"] += jumlah_tambahan
-            print(f"Stok buku '{buku['Judul Buku']}' berhasil ditambahkan sebanyak {jumlah_tambahan}!")
+            print(f"/nStok buku '{buku['Judul Buku']}' berhasil ditambahkan sebanyak {jumlah_tambahan}!")
             return
 
     # Jika buku baru, membuat ID baru dan menambahkan ke stok
@@ -84,5 +84,5 @@ def tambah_stok_buku():
         "Penulis": penulis,
         "Stok": jumlah_tambahan
     })
-    print(f"Buku baru '{judul_buku}' oleh {penulis} berhasil ditambahkan dengan ID {id_buku_baru} dan stok berjumlah {jumlah_tambahan}!")
+    print(f"/nBuku baru '{judul_buku}' oleh {penulis} berhasil ditambahkan dengan ID {id_buku_baru} dan stok berjumlah {jumlah_tambahan}!")
     read_stok_buku()

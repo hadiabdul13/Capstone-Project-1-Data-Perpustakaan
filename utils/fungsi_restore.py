@@ -11,17 +11,17 @@ def hapus_peminjaman():
             if pem["ID Peminjam"] == id_peminjam:
                 recycle_bin.append(pem)
                 peminjaman.remove(pem)
-                print("Data peminjaman dipindahkan ke Recycle Bin.\n")
+                print("\nData peminjaman dipindahkan ke Recycle Bin.\n")
 
                 if peminjaman:
-                    print("Data peminjaman yang tersisa:")
+                    print("\nData peminjaman yang tersisa:")
                     read_data(peminjaman)
                 else:
-                    print("Semua data peminjaman telah dihapus!")
+                    print("\nSemua data peminjaman telah dihapus!")
 
                 return
 
-        print("ID Peminjam tidak ditemukan! Silakan masukkan ID yang benar.")
+        print("\nID Peminjam tidak ditemukan! Silakan masukkan ID yang benar.")
         read_data(peminjaman)  # Menampilkan data yang masih ada sebelum meminta input lagi
 
 def pulihkan_peminjaman():
@@ -30,7 +30,7 @@ def pulihkan_peminjaman():
     from main_menu import recycle_bin    
 
     if not recycle_bin:
-        print("Recycle Bin kosong. Tidak ada data untuk dipulihkan.")
+        print("\nRecycle Bin kosong. Tidak ada data untuk dipulihkan.")
         return
     read_data(recycle_bin)
 
@@ -41,7 +41,7 @@ def pulihkan_peminjaman():
                 peminjaman.append(pem)
                 recycle_bin.remove(pem)
                 print("Data peminjaman berhasil dipulihkan.\n")
-                print("Data peminjaman setelah pemulihan:")
+                print("\nData peminjaman setelah pemulihan:")
                 read_data(peminjaman)
                 return
-        print("ID Peminjam tidak ditemukan di Recycle Bin! Silakan masukkan ID yang benar.")
+        print("\nID Peminjam tidak ditemukan di Recycle Bin! Silakan masukkan ID yang benar.")

@@ -10,4 +10,4 @@ def membuat_id_buku():
             return id_baru
         
 def membuat_id_peminjam():
-    return 'P' + ''.join(random.choices(string.ascii_uppercase + string.digits, k=5))
+    return 'P' + ''.join(random.choices(string.ascii_uppercase + string.digits, k=3))
