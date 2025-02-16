@@ -64,7 +64,7 @@ def tambah_stok_buku():
 
     print("")
     print("\n----- TAMBAH STOK BUKU -----")
-    judul_buku = validasi_input_alfabet("Masukkan judul buku yang akan ditambahkan: ").strip()
+    judul_buku = input("Masukkan judul buku yang akan ditambahkan: ").strip()
     penulis = validasi_input_alfabet("Masukkan Nama Penulis: ").strip()
 
     jumlah_tambahan = validasi_input_angka("Masukkan Jumlah Stok Tambahan: ")

@@ -1,62 +1,10 @@
 from .fungsi_baca_data import read_data
 from .fungsi_validasi import validasi_id_buku, validasi_input_angka, validasi_tanggal
 
-# def perbarui_peminjaman():
-
-#     from main_menu import peminjaman
-    
-#     read_data(peminjaman)
-
-#     while True:
-#         id_peminjam = input("\nMasukkan ID Peminjam yang ingin diperbarui: ").strip().upper()
-
-#         for data in peminjaman:
-#             if data['ID Peminjam'] == id_peminjam:
-#                 print("\nData ditemukan. Silakan pilih data yang ingin diperbarui.")
-
-#                 from main_menu import peminjaman
-#                 from main_menu import stok_buku
-
-#                 while True:
-#                     pembaruan = input("\nMasukkan data yang ingin diperbarui (Nama Peminjam, Judul Buku, Jumlah Buku, Tanggal Peminjaman). Ketik 'selesai' untuk keluar: ").strip().title()
-#                     if pembaruan == "Selesai":
-#                         print("\nPerbaruan selesai")
-#                         read_data(peminjaman)
-#                         return
-
-#                     if pembaruan in ["Nama Peminjam", "Judul Buku", "Jumlah Buku", "Tanggal Peminjaman"]:
-#                         if pembaruan == "Judul Buku":
-#                             while True:
-#                                 id_buku_baru = validasi_id_buku('Mengganti judul buku, berarti mengganti buku yang ingin dipinjam. Masukkan ID buku baru yang ingin dipinjam: ')
-#                                 read_data(stok_buku)        
-#                                 for buku in stok_buku:
-#                                     if buku["ID Buku"] == id_buku_baru:
-#                                         data["ID Buku"] = id_buku_baru
-#                                         data["Judul Buku"] = buku["Judul Buku"]
-#                                         break
-#                                 else:
-#                                     print("\nID Buku tidak ditemukan! Silakan masukkan ID yang benar.")
-#                                     continue  # Minta input ID lagi jika salah
-#                                 break
-#                         elif pembaruan == "Jumlah Buku":
-#                             data[pembaruan] = validasi_input_angka("\nMasukkan jumlah buku baru: ")
-#                         elif pembaruan == "Tanggal Peminjaman":
-#                             data[pembaruan] = validasi_tanggal()
-#                         else:
-#                             data[pembaruan] = input(f"/nMasukkan {pembaruan} baru: ").strip()
-
-#                         print(f"{pembaruan} berhasil diperbarui!")
-#                     else:
-#                         print("\nKolom tidak valid. Gunakan: Nama Peminjam, Judul Buku, Jumlah Buku, Tanggal Peminjaman.")
-#                 return
-
-#         print("\nID Peminjam tidak ditemukan! Silakan masukkan ID yang benar.")
-
-
 def perbarui_peminjaman():
     from main_menu import peminjaman, stok_buku
 
-    read_data(peminjaman)  # Load latest peminjaman data
+    read_data(peminjaman)  
 
     while True:
         id_peminjam = input("\nMasukkan ID Peminjam yang ingin diperbarui: ").strip().upper()
@@ -66,7 +14,7 @@ def perbarui_peminjaman():
         for data in peminjaman:
             if data['ID Peminjam'] == id_peminjam:
                 data_peminjam = data
-                break  # Stop loop when found
+                break  
 
         if data_peminjam:
             print("\nData ditemukan. Silakan pilih data yang ingin diperbarui.")
@@ -117,8 +65,69 @@ def perbarui_peminjaman():
             print("\nTanggal Peminjaman berhasil diperbarui!")
 
         elif pembaruan == "Nama Peminjam":
-            data_peminjam["Nama Peminjam"] = input(f"/nMasukkan {pembaruan} baru: ").strip()
+            data_peminjam["Nama Peminjam"] = input(f"\nMasukkan {pembaruan} baru: ").strip()
             print(f"\n{pembaruan} berhasil diperbarui!")
+
+        while True:
+            lanjut = input("\nMasih adakah yang ingin diperbarui? (ya/tidak): ").strip().lower()
+            if lanjut in ["ya", "tidak"]:
+                break
+            else:
+                print("\nMasukkan hanya 'ya' atau 'tidak'.")
+
+        if lanjut == "tidak":
+            print("\nPerbaruan selesai.")
+            return
+        
+def perbarui_data_buku():
+    from main_menu import stok_buku
+    from utils.fungsi_validasi import validasi_input_angka, validasi_input_alfabet
+
+    if not stok_buku:
+        print("\nTidak ada data buku saat ini.")
+        return
+
+    read_data(stok_buku)  # Menampilkan daftar buku sebelum perbarui
+
+    while True:
+        id_buku = input("\nMasukkan ID Buku yang ingin diperbarui: ").strip().upper()
+
+        # Cek apakah ID Buku ada dalam stok
+        data_buku = None
+        for buku in stok_buku:
+            if buku["ID Buku"] == id_buku:
+                data_buku = buku
+                break
+
+        if data_buku:
+            print("\nData buku ditemukan. Silakan pilih informasi yang ingin diperbarui.")
+            break
+        else:
+            print("\nID Buku tidak ditemukan! Silakan coba lagi.")
+
+    while True:
+        pembaruan = input("\nMasukkan data yang ingin diperbarui (Judul Buku, Penulis, Stok). Ketik 'selesai' untuk keluar: ").strip().title()
+
+        if pembaruan.lower() == "selesai":
+            print("\nPerbaruan selesai.")
+            return
+
+        if pembaruan not in ["Judul Buku", "Penulis", "Stok"]:
+            print("\nKolom tidak valid. Gunakan: Judul Buku, Penulis, Stok.")
+            continue
+
+        # Perbarui data berdasarkan input
+        if pembaruan == "Judul Buku":
+            data_buku["Judul Buku"] = input("\nMasukkan judul buku baru: ").strip()
+            print("\nJudul buku berhasil diperbarui!")
+
+        elif pembaruan == "Penulis":
+            data_buku["Penulis"] = validasi_input_alfabet("\nMasukkan nama penulis baru: ").strip()
+            print("\nNama penulis berhasil diperbarui!")
+
+        elif pembaruan == "Stok":
+            data_buku["Stok"] = validasi_input_angka("\nMasukkan jumlah stok buku baru: ")
+            print("\nJumlah stok berhasil diperbarui!")
 
         while True:
             lanjut = input("\nMasih adakah yang ingin diperbarui? (ya/tidak): ").strip().lower()
@@ -138,7 +147,7 @@ def pengembalian_pinjaman():
         print("\nTidak ada data peminjaman saat ini.")
         return
 
-    read_data(peminjaman)  # Load latest peminjaman data
+    read_data(peminjaman) 
 
     while True:
         id_peminjam = input("\nMasukkan ID Peminjam yang mengembalikan buku: ").strip().upper()

@@ -1,4 +1,5 @@
 from datetime import datetime
+
 def validasi_input_alfabet(prompt):
     while True:
         inputan = input(prompt).strip()
