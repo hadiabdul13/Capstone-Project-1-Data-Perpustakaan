@@ -143,35 +143,31 @@ def perbarui_data_buku():
 def pengembalian_pinjaman():
     from main_menu import peminjaman, stok_buku
 
-    if not peminjaman:
+    if not peminjaman:  # Cek apakah ada peminjaman
         print("\nTidak ada data peminjaman saat ini.")
         return
 
-    read_data(peminjaman) 
+    read_data(peminjaman)
 
-    while True:
-        id_peminjam = input("\nMasukkan ID Peminjam yang mengembalikan buku: ").strip().upper()
+    while True:  # Loop utama untuk pengembalian buku
+        id_peminjam = input("\nMasukkan ID Peminjam yang akan mengembalikan buku: ").strip().upper()
 
         # Filter daftar pinjaman yang sesuai dengan ID Peminjam
         daftar_pinjaman = [p for p in peminjaman if p["ID Peminjam"] == id_peminjam]
 
         if not daftar_pinjaman:
             print("\nID Peminjam tidak ditemukan dalam daftar peminjaman. Silakan coba lagi.")
-            continue  # Minta ID lagi
+            continue  # Kembali ke awal untuk meminta ID Peminjam lagi
 
         print("\nDaftar Buku yang Dipinjam:")
         for pem in daftar_pinjaman:
-            print(f"\nID Buku: {pem['ID Buku']} | Judul: {pem['Judul Buku']} | Jumlah: {pem['Jumlah Buku']}")
-            print("")
+            print(f"ID Buku: {pem['ID Buku']} | Judul: {pem['Judul Buku']} | Jumlah: {pem['Jumlah Buku']}")
+
         while True:
             id_buku_kembali = input("\nMasukkan ID Buku yang akan dikembalikan: ").strip().upper()
 
-            # Cek apakah buku yang akan dikembalikan benar-benar dipinjam oleh user ini
-            peminjaman_terpilih = None
-            for pem in daftar_pinjaman:
-                if pem["ID Buku"] == id_buku_kembali:
-                    peminjaman_terpilih = pem
-                    break
+            # Cek apakah buku benar-benar dipinjam oleh peminjam ini
+            peminjaman_terpilih = next((pem for pem in daftar_pinjaman if pem["ID Buku"] == id_buku_kembali), None)
 
             if not peminjaman_terpilih:
                 print("\nID Buku tidak sesuai dengan data peminjaman. Silakan coba lagi.")
@@ -183,14 +179,20 @@ def pengembalian_pinjaman():
                     buku["Stok"] += peminjaman_terpilih["Jumlah Buku"]
                     break
 
-            # Hapus peminjaman hanya untuk buku ini, bukan semua pinjaman peminjam
+            # Hapus peminjaman hanya untuk buku ini
             peminjaman.remove(peminjaman_terpilih)
 
-            print(f"Buku '{peminjaman_terpilih['Judul Buku']}' berhasil dikembalikan.")
+            print(f"\nBuku '{peminjaman_terpilih['Judul Buku']}' berhasil dikembalikan.")
 
             # Tanya apakah ingin mengembalikan buku lain
-            lanjut = input("\nApakah masih ada buku lain yang ingin dikembalikan? (ya/tidak): ").strip().lower()
-            if lanjut != "ya":
-                print("\nSemua buku yang ingin dikembalikan telah diproses.")
-                return
+            while True:
+                lanjut = input("\nApakah masih ada buku lain yang ingin dikembalikan? (ya/tidak): ").strip().lower()
+                if lanjut in ["ya", "tidak"]:
+                    break
+                print("\nMasukkan hanya 'ya' atau 'tidak'. Silakan coba lagi.")
 
+            if lanjut == "ya":
+                break  # Kembali ke awal untuk memasukkan ID peminjam baru
+
+            print("\nSemua buku yang ingin dikembalikan telah diproses.")
+            return  # Keluar setelah semua proses selesai

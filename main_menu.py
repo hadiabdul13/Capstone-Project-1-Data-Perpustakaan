@@ -68,7 +68,6 @@ def perpustakaan():
                 print("\n1. Perbarui Data Buku")
                 print("2. Perbarui Data Peminjaman")
                 print("3. Kembali ke Menu Utama")
-                
                 sub_pilihan = fv.validasi_input_angka('Pilih data yang ingin diperbarui (1-3): ')
 
                 if sub_pilihan == 1:
