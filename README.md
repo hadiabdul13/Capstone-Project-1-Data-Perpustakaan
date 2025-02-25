@@ -1,4 +1,4 @@
-# Creator Profile:
+## Creator Profile:
 Abdul Hadi - [hadiabdul13@gmail.com](hadiabdul13@gmail.com) | [LinkedIn](https://www.linkedin.com/in/abdul-hadi-447608159/)
 
 # Sistem Administrasi Peminjaman Buku
@@ -21,10 +21,6 @@ Sistem ini adalah program berbasis Python untuk membantu administrasi peminjaman
    ```sh
    git clone https://github.com/username/repository.git](https://github.com/hadiabdul13/Capstone-Project-1-Data-Perpustakaan)
    cd repository
-   ```
-3. Install dependensi yang diperlukan:
-   ```sh
-   pip install -r requirements.txt
    ```
 
 ## Cara Penggunaan
